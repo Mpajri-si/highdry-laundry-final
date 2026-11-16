@@ -1,5 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PublicPromoController;
+use App\Http\Controllers\PublicServiceController;
 use Illuminate\Support\Facades\Route;
 
 // Publik (Guest)
@@ -40,6 +47,6 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::patch('/pesanan/{order}/verifikasi', [Admin\OrderController::class, 'verify'])->name('orders.verify');
     Route::patch('/pesanan/{order}/tolak', [Admin\OrderController::class, 'reject'])->name('orders.reject');
     Route::patch('/pesanan/{order}/status', [Admin\OrderController::class, 'updateStatus'])->name('orders.status');
-    Route::resource('pelanggan', Admin\CustomerController::class)->parameters(['pelanggan' => 'customer'])->names('customers')->except(['create','store']);
+    Route::resource('pelanggan', Admin\CustomerController::class)->parameters(['pelanggan' => 'customer'])->names('customers')->except(['create', 'store']);
     Route::get('/laporan', [Admin\ReportController::class, 'index'])->name('reports.index');
 });
